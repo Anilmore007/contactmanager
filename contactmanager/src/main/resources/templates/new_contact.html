@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Contact Manager System</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div align="center" class="container my-2"></div>
+
+	<h>Add New Contact</h>
+
+	<form action="#" th:action="@{/saveContact}" th:object="${contact}"
+		method="POST">
+		<input type="text" th:field="*{firstName}" placeholder="First Name"
+			class="form-control mb-4 col-4" th:value="${contact.firstName}"
+			th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}">
+		<div th:each="e : ${#fields.errors('firstName')}" th:text="${e}"></div>
+
+		<input type="text" th:field="*{lastName}" placeholder="Last Name"
+			class="form-control mb-4 col-4" th:value="${contact.lastName}"
+			th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}">
+		<div th:each="e : ${#fields.errors('lastName')}" th:text="${e}"></div>
+
+		<input type="text" th:field="*{email}" placeholder="Email"
+			class="form-control mb-4 col-4" th:value="${contact.email}"
+			th:classappend="${#fields.hasErrors('email')?'is-invalid':''}">
+		<div th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
+
+		<input type="text" th:field="*{phoneNumber}"
+			placeholder="Phone Number" class="form-control mb-4 col-4"
+			th:value="${contact.phoneNumber}"
+			th:classappend="${#fields.hasErrors('phoneNumber')?'is-invalid':''}">
+		<div th:each="e : ${#fields.errors('phoneNumber')}" th:text="${e}"></div>
+
+		<!-- <input type="text" th:field="*{status}" placeholder="Status"
+			class="form-control mb-4 col-4" th:value="${contact.status}" th:classappend="${#fields.hasErrors('status')?'is-invalid':''}"> 
+		<div th:each="e : ${#fields.errors('status')}" th:text="${e}"></div> -->
+
+		Status &nbsp;&nbsp;<select th:field="*{status}">
+			<option th:value="'Active'" th:text="Active"></option>
+			<option th:value="'Inactive'" th:text="Inactive"></option>
+		</select>&nbsp;&nbsp;
+
+		<button type="submit" class="btn btn-info col-2">Save Contact</button>
+	</form>
+
+</body>
+</html>
